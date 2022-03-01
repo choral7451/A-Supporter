@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.asupporter.dao.CrawlerMapper" >
+    <delete id="deleteAll">
+        TRUNCATE TABLE CRAWLING
+    </delete>
+    <select id="list" resultType="com.example.asupporter.dto.CrawlerDTO">
+        SELECT * FROM CRAWLING
+    </select>
+    <insert id="write">
+        INSERT INTO CRAWLING (CNAME,TITLE,DATE,URL) VALUES (#{cname}, #{title}, #{date}, #{url})
+    </insert>
+    <delete id="delete">
+        DELETE FROM CRAWLING WHERE ID = #{id}
+    </delete>
+    <select id="updateList" resultType="com.example.asupporter.dto.CrawlerDTO">
+        SELECT * FROM CRAWLING WHERE ID = #{id}
+    </select>
+    <update id="update">
+        UPDATE CRAWLING SET TYPE = "${type}", CNAME = "${cname}", TITLE = "${title}", DATE = "${date}", URL ="${url}"  WHERE ID = ${id}
+    </update>
+</mapper>
+

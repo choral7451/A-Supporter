@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.asupporter.dao.BoardMapper" >
+    <select id="countList" resultType="int">
+        SELECT COUNT(ID) FROM BOARD
+    </select>
+    <select id="pageList" resultType="com.example.asupporter.dto.BoardDTO">
+        SELECT * FROM BOARD WHERE ID BETWEEN #{num2} AND #{num1} ORDER BY ID DESC
+    </select>
+    <insert id="write">
+        INSERT INTO BOARD (CNAME,TITLE,DATE,TYPE,URL) VALUES (#{cname}, #{title}, #{date}, #{type}, #{url})
+    </insert>
+
+    <select id="searchCountList" resultType="int">
+        SELECT COUNT(ID) FROM BOARD WHERE (CNAME LIKE concat('%', #{search}, '%')) OR (TITLE LIKE concat('%', #{search}, '%'))
+    </select>
+    <select id="searchList" resultType="string">
+        SELECT ID FROM BOARD WHERE (CNAME LIKE concat('%', #{search}, '%')) OR (TITLE LIKE concat('%', #{search}, '%'))
+    </select>
+    <delete id="deleteAll">
+        TRUNCATE TABLE TEMP_TABLE
+    </delete>
+    <insert id="saveId">
+        INSERT INTO TEMP_TABLE (ID) VALUES (#{searchGetId})
+    </insert>
+</mapper>
+
